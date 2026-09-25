@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const porta = 3000
 
+app.use(express.json())
+
 const tarefas = [
     { id: 1, titulo: 'faze tarefa', concluida: false },
     { id: 2, titulo: 'come', concluida: true },
@@ -32,6 +34,20 @@ app.get('/tarefas/:id', (req, res) => {
     }
 
     res.json(tarefa)
+})
+
+app.post('/tarefas', (req, res) => {
+    const { titulo } = req.body
+
+    const novaTarefa = {
+        id: tarefas.length + 1,
+        titulo: titulo,
+        concluida: false
+    }
+
+    tarefas.push(novaTarefa)
+
+    res.status(201).json(novaTarefa)
 })
 
 app.listen(porta, () => {
