@@ -14,8 +14,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/tarefas', (req, res) => {
-    res.json(tarefas)
+    const concluida = req.query.concluida
 
+    if (concluida === 'true') {
+        const tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida === true)
+        return res.json(tarefasConcluidas)
+    }
+    res.json(tarefas)
 })
 
 app.get('/tarefas/:id', (req, res) => {
