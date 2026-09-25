@@ -1,0 +1,54 @@
+### 1
+GET http://localhost:3001/
+API de Tarefas no ar
+
+
+### 2 
+GET http://localhost:3001/tarefas
+
+id titulo      concluida
+-- ------      ---------
+ 1 faze tarefa     False
+ 2 come             True
+ 3 dumi            False
+
+### 3 
+GET http://localhost:3001/tarefas/2
+
+id titulo concluida
+-- ------ ---------
+ 2 come        True
+
+
+### 4 - Buscar uma tarefa inexistente
+GET http://localhost:3001/tarefas/10
+
+PS C:\Users\Aryane\teste\middleware> Invoke-RestMethod http://localhost:3001/tarefas/10
+Invoke-RestMethod : {"erro":"Tarefa não encontrada"}
+No linha:1 caractere:1
++ Invoke-RestMethod http://localhost:3001/tarefas/10
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (System.Net.HttpWebRequest:HttpWebRequest) [Invoke-RestMethod], WebException
+    + FullyQualifiedErrorId : WebCmdletWebResponseException,Microsoft.PowerShell.Commands.InvokeRestMethodCommand
+PS C:\Users\Aryane\teste\middleware> 
+
+
+### 5 - Filtrar apenas tarefas concluídas
+GET http://localhost:3001/tarefas?concluida=true
+
+id titulo concluida
+-- ------ ---------
+ 2 come        True
+
+
+### 6 - Criar uma nova tarefa
+POST http://localhost:3001/tarefas
+Content-Type: application/json
+
+{
+    "titulo": "estudar Express"
+}
+
+id titulo          concluida
+-- ------          ---------
+ 4 estudar Express     False
